@@ -388,10 +388,22 @@ plt.tight_layout()
 plt.show()
 
 # === Print R² scores and accuracy ===
-print("\nR² Scores by Model and Target")
+eval_list = []
 for i, target in enumerate(targets):
-    print(f"Target: {target.upper()}")
-    print(f"  MLP:           R² = {r2_mlp[i]:.4f}")
-    print(f"  Random Forest: R² = {r2_rf[i]:.4f}")
-    print(f"  XGBoost:       R² = {r2_xgb[i]:.4f}")
+    # print(f"Target: {target.upper()}")
+    # print(f"  MLP:           R² = {r2_mlp[i]:.4f}")
+    # print(f"  Random Forest: R² = {r2_rf[i]:.4f}")
+    # print(f"  XGBoost:       R² = {r2_xgb[i]:.4f}")
+    model_eval = {
+        'Target' : target.upper(),
+        'MLP' : r2_mlp[i],
+        'Random Forest' : r2_rf[i],
+        'XGBoost' : r2_rf[i],
+        }
+    eval_list.append(model_eval)
+
+    
 print(f"\nPosition Classification Accuracy (LogReg): {acc_pos:.4f}")
+print()
+print("\nR² Scores by Model and Target")
+print(pd.DataFrame(eval_list))
